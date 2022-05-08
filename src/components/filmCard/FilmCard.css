@@ -1,0 +1,34 @@
+.filmCard {
+    width: 600px;
+    height: 350px;
+    margin-bottom: 70px;
+}
+
+.filmName {
+    display: flex;
+    justify-content: space-between;
+}
+
+.filmName span {
+    font-weight: bold;
+}
+
+.filmAbout {
+    display: flex;
+    font-size: 13px;
+    text-align: left;
+}
+
+.filmImg img {
+    width: 200px;
+    height: 300px;
+    margin-right: 20px;
+}
+
+.descriptionItem span {
+    font-weight: bold;
+}
+
+.about {
+    margin-bottom: 10px;
+}

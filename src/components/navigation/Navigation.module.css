@@ -1,0 +1,21 @@
+.navigation {
+    width: 330px;
+}
+
+.navigation span {
+    font-weight: bold;
+}
+
+.categories {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.category {
+    width: 150px;
+}
+
+.categoryName {
+    margin: 10px 0;
+}
+
