@@ -1,19 +1,29 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import './App.css'
 import {Header} from './components/header/Header'
-import {HashRouter, Routes, Route, Navigate} from 'react-router-dom'
+import {HashRouter, Navigate, Route, Routes} from 'react-router-dom'
 import {Favourites} from './components/favourites/Favourites'
 import {Profile} from './components/profile/Profile'
 import {FilmPage} from './components/filmPage/FilmPage'
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
-import {FilmsStateType} from './state/films-reducer';
+import {FilmsStateType, filterFilmsAC} from './state/films-reducer';
 import {Main} from './components/main/Main';
-import {Navigation} from './components/navigation/Navigation';
+import {GenreType, Navigation} from './components/navigation/Navigation';
 
 export const App = () => {
 
     const films = useSelector<AppRootStateType, FilmsStateType[]>(state => state.films)
+
+    // const filteredFilms = films
+    //
+    // const filterForFilms = useCallback((genre: GenreType) => {
+    //     let action = filteredFilms.filter(f => f.genre === genre)
+    // }, [filteredFilms])
+
+    const dispatch = useDispatch()
+
+    const filterForFilms = useCallback((genre: GenreType) => dispatch(filterFilmsAC(genre)), [dispatch])
 
     return (
         <div className="App">
@@ -21,7 +31,7 @@ export const App = () => {
                 <HashRouter>
                     <Header/>
                     <div className={'page'}>
-                        <Navigation/>
+                        <Navigation films={films} filterForFilms={filterForFilms}/>
                         <Routes>
                             <Route path={'/'} element={<Navigate to={'/main'}/>}/>
                             <Route path={'/main'} element={<Main films={films}/>}/>

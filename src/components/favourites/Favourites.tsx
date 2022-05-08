@@ -9,7 +9,7 @@ type FavouritesType = {
 
 export const Favourites = React.memo((props: FavouritesType) => {
 
-    let favouriteFilms = props.films.filter(f => f.favourite)
+    const favouriteFilms = props.films.filter(f => f.favourite)
 
     return (
         <div className="favourites">

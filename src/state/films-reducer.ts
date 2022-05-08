@@ -2,6 +2,7 @@ import ironManImg from '../images/ironMan.jpg';
 import ironMan3Img from '../images/ironMan3.jpg';
 import noTimeToDie from '../images/noTimeToDie.jpg';
 import batman from '../images/Batman.jpg';
+import {GenreType} from '../components/navigation/Navigation';
 
 export type FilmsStateType = {
     id: number
@@ -22,7 +23,12 @@ type AddFilmToFavoriteActionType = {
     favourite: boolean
 }
 
-type ActionsType = AddFilmToFavoriteActionType
+type FilterFilmsActionType = {
+    type: 'FILTER-FILMS'
+    genre: string
+}
+
+type ActionsType = AddFilmToFavoriteActionType | FilterFilmsActionType
 
 const initialState = [
     {
@@ -99,6 +105,11 @@ export const filmsReducer = (state: FilmsStateType[] = initialState, action: Act
             state[action.id] = {...films}
             return [...state]
         }
+        case 'FILTER-FILMS':
+            const films = state
+            films.filter(f => f.genre === action.genre)
+            state = {...films}
+            return [...state]
         default:
             return state
     }
@@ -106,4 +117,8 @@ export const filmsReducer = (state: FilmsStateType[] = initialState, action: Act
 
 export const addToFavouriteAC = (id: number, favourite: boolean): AddFilmToFavoriteActionType => {
     return {type: 'ADD-TO-FAVOURITE', id, favourite}
+}
+
+export const filterFilmsAC = (genre: GenreType): FilterFilmsActionType => {
+    return {type: 'FILTER-FILMS', genre}
 }
