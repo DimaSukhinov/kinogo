@@ -1,11 +1,12 @@
-import React, {useCallback} from 'react';
-import s from './FilmCard.module.css';
-import BookmarkIcon from '@material-ui/icons/Bookmark';
-import BookIcon from '@material-ui/icons/Book';
-import {Icon, Paper} from '@material-ui/core';
-import {NavLink} from 'react-router-dom';
+import React, {ChangeEvent, useCallback, useEffect, useState} from 'react'
+import s from './FilmCard.module.css'
+import BookmarkIcon from '@material-ui/icons/Bookmark'
+import BookIcon from '@material-ui/icons/Book'
+import {Box, Icon, Paper} from '@material-ui/core'
+import {NavLink} from 'react-router-dom'
 import {addToFavouriteAC, FilmsStateType} from '../../state/description-reducer'
-import {useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux'
+import {Rating} from '@material-ui/lab'
 
 type FilmCardType = {
     films: FilmsStateType
@@ -13,8 +14,15 @@ type FilmCardType = {
 
 export const FilmCard = React.memo((props: FilmCardType) => {
 
-    const dispatch = useDispatch()
+    const [value, setValue] = useState<number | null>(props.films.stars)
 
+    useEffect(() => {
+        setValue(props.films.stars)
+    }, [props])
+
+    const onChangeRating = (e: ChangeEvent<{}>, newValue: number | null) => setValue(newValue)
+
+    const dispatch = useDispatch()
     const addToFavourite = useCallback(() => dispatch(addToFavouriteAC(props.films.id, !props.films.favourite)), [dispatch, props])
 
     return (
@@ -26,10 +34,18 @@ export const FilmCard = React.memo((props: FilmCardType) => {
                             <span>{props.films.filmTitle} ({props.films.year})</span>
                         </NavLink>
                     </div>
-                    <div onClick={addToFavourite}>
-                        {
-                            props.films.favourite ? <Icon><BookIcon/></Icon> : <Icon><BookmarkIcon/></Icon>
-                        }
+                    <div className={s.data}>
+                        <Box  borderColor="transparent">
+                            <Rating
+                                value={value}
+                                onChange={onChangeRating}
+                            />
+                        </Box>
+                        <div className={s.favourite} onClick={addToFavourite}>
+                            {
+                                props.films.favourite ? <Icon><BookIcon/></Icon> : <Icon><BookmarkIcon/></Icon>
+                            }
+                        </div>
                     </div>
                 </div>
                 <div className={s.filmAbout}>
@@ -47,7 +63,6 @@ export const FilmCard = React.memo((props: FilmCardType) => {
                         </div>
                         <div className={s.descriptionItem}><span>Country:</span> {props.films.country}</div>
                         <div className={s.descriptionItem}><span>Genre:</span> {props.films.genre}</div>
-                        <div className={s.descriptionItem}><span>Rating:</span> {props.films.rating}</div>
                         <div className={s.descriptionItem}><span>Duration:</span> {props.films.duration}</div>
                         <div className={s.descriptionItem}><span>Premiere:</span> {props.films.premiere}</div>
                     </div>

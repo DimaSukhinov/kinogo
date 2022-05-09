@@ -8,6 +8,7 @@ import {GenreType} from '../components/navigation/Navigation';
 
 export type FilmsStateType = {
     id: number
+    stars: number
     favourite: boolean
     filmTitle: string
     filmImg: any //
@@ -15,7 +16,6 @@ export type FilmsStateType = {
     year: string
     country: string
     genre: string
-    rating: number
     duration: string
     premiere: string
 }
@@ -54,6 +54,7 @@ type ActionsType =
 const initialState = [
     {
         id: 0,
+        stars: 5,
         favourite: true,
         filmTitle: 'Iron man',
         filmImg: ironManImg,
@@ -65,12 +66,12 @@ const initialState = [
         year: '2008',
         country: 'USA',
         duration: '02:07:00',
-        genre: 'fantastic',
-        rating: 8,
+        genre: 'Fantastic',
         premiere: '14 april 2008'
     },
     {
         id: 1,
+        stars: 4,
         favourite: false,
         filmTitle: 'Batman',
         filmImg: batman,
@@ -82,12 +83,12 @@ const initialState = [
         year: '2022',
         country: 'USA',
         duration: '02:57:00',
-        genre: 'detective',
-        rating: 7,
+        genre: 'Detective',
         premiere: '1 march 2022'
     },
     {
         id: 2,
+        stars: 3,
         favourite: true,
         filmTitle: 'No time to die',
         filmImg: noTimeToDie,
@@ -99,12 +100,12 @@ const initialState = [
         year: '2020',
         country: 'Great Britain, USA',
         duration: '01:42:00',
-        genre: 'thriller',
-        rating: 7.1,
+        genre: 'Thriller',
         premiere: '4 april 2020'
     },
     {
         id: 3,
+        stars: 4,
         favourite: false,
         filmTitle: 'Iron man 3',
         filmImg: ironMan3Img,
@@ -116,12 +117,12 @@ const initialState = [
         year: '2013',
         country: 'USA',
         duration: '02:11:00',
-        genre: 'action',
-        rating: 8.5,
+        genre: 'Action',
         premiere: '12 april 2013'
     },
     {
         id: 4,
+        stars: 3,
         favourite: false,
         filmTitle: 'The devil all the time',
         filmImg: theDevilAllTheTime,
@@ -134,12 +135,12 @@ const initialState = [
         year: '2020',
         country: 'USA',
         duration: '02:18:00',
-        genre: 'thriller',
-        rating: 6.7,
+        genre: 'Thriller',
         premiere: '16 september 2020'
     },
     {
         id: 5,
+        stars: 5,
         favourite: true,
         filmTitle: 'The dark knight',
         filmImg: theDarkKnight,
@@ -152,8 +153,7 @@ const initialState = [
         year: '2008',
         country: 'USA, Great Britain',
         duration: '02:32:00',
-        genre: 'action',
-        rating: 9.2,
+        genre: 'Action',
         premiere: '14 july 2008'
     },
 ]
@@ -177,7 +177,7 @@ export const descriptionReducer = (state: FilmsStateType[] = initialState, actio
             return [...state]
         }
         case 'SORT-BY-RATING':
-            const films = state.sort((a, b) => b.rating - a.rating)
+            const films = state.sort((a, b) => b.stars - a.stars)
             state = [...films]
             return [...state]
         case 'ALL':

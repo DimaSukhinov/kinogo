@@ -13,6 +13,14 @@
     font-weight: bold;
 }
 
+.data {
+    display: flex;
+}
+
+.favourite {
+    margin-left: 5px;
+}
+
 .filmAbout {
     display: flex;
     font-size: 13px;

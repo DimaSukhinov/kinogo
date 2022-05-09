@@ -6,28 +6,28 @@ type NavigationType = {
     films: FilmsStateType[]
     filterFilmsByGenre: (genre: GenreType) => void
     filterFilmsByYear: (year: string) => void
-    allFilms: any
+    allFilms: () => void
 }
 
-export type GenreType = 'all' | 'action' | 'detective' | 'fantastic' | 'thriller'
+export type GenreType = 'Action' | 'Detective' | 'Fantastic' | 'Thriller'
 
 export const Navigation = React.memo((props: NavigationType) => {
 
     const actionFilms = () => {
         props.allFilms()
-        props.filterFilmsByGenre('action')
+        props.filterFilmsByGenre('Action')
     }
     const detectiveFilms = () => {
         props.allFilms()
-        props.filterFilmsByGenre('detective')
+        props.filterFilmsByGenre('Detective')
     }
     const fantasticFilms = () => {
         props.allFilms()
-        props.filterFilmsByGenre('fantastic')
+        props.filterFilmsByGenre('Fantastic')
     }
     const thrillerFilms = () => {
         props.allFilms()
-        props.filterFilmsByGenre('thriller')
+        props.filterFilmsByGenre('Thriller')
     }
 
     const filmsFrom2008Year = () => {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import s from './Main.module.css'
 import {FilmCard} from '../filmCard/FilmCard'
 import {FilmsStateType} from '../../state/description-reducer'
