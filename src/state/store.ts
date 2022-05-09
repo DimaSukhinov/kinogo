@@ -1,9 +1,9 @@
-import {combineReducers, createStore} from 'redux';
-import {filmsReducer} from './films-reducer';
+import {combineReducers, createStore} from 'redux'
+import {descriptionReducer} from './description-reducer'
 
 
 const rootReducer = combineReducers({
-    films: filmsReducer,
+    films: descriptionReducer,
 })
 
 export type AppRootStateType = ReturnType<typeof rootReducer>

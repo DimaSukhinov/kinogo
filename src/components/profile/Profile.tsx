@@ -1,9 +1,9 @@
 import React from 'react';
-import './Profile.css';
+import s from './Profile.module.css';
 
 export const Profile = React.memo(() => {
     return (
-        <div className="profile">
+        <div className={s.profile}>
             Profile
         </div>
     );

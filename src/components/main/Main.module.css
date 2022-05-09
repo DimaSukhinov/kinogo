@@ -1,0 +1,10 @@
+.main {
+    display: flex;
+}
+
+.sort {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 0 5px 20px;
+    font-weight: bold;
+}

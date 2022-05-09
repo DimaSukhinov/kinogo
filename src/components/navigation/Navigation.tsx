@@ -1,23 +1,51 @@
-import React, {useCallback} from 'react'
+import React from 'react'
 import s from './Navigation.module.css'
-import {FilmsStateType, filterFilmsAC} from '../../state/films-reducer'
-import {useDispatch} from 'react-redux';
-import {Button} from '@material-ui/core';
+import {FilmsStateType} from '../../state/description-reducer'
 
 type NavigationType = {
     films: FilmsStateType[]
-    filterForFilms: any
+    filterFilmsByGenre: (genre: GenreType) => void
+    filterFilmsByYear: (year: string) => void
+    allFilms: any
 }
 
 export type GenreType = 'all' | 'action' | 'detective' | 'fantastic' | 'thriller'
 
 export const Navigation = React.memo((props: NavigationType) => {
 
-    // const dispatch = useDispatch()
-    //
-    // const filterForFilms = useCallback((genre: GenreType) => dispatch(filterFilmsAC(genre)), [dispatch])
+    const actionFilms = () => {
+        props.allFilms()
+        props.filterFilmsByGenre('action')
+    }
+    const detectiveFilms = () => {
+        props.allFilms()
+        props.filterFilmsByGenre('detective')
+    }
+    const fantasticFilms = () => {
+        props.allFilms()
+        props.filterFilmsByGenre('fantastic')
+    }
+    const thrillerFilms = () => {
+        props.allFilms()
+        props.filterFilmsByGenre('thriller')
+    }
 
-    const actionFilms = () => props.filterForFilms('action')
+    const filmsFrom2008Year = () => {
+        props.allFilms()
+        props.filterFilmsByYear('2008')
+    }
+    const filmsFrom2013Year = () => {
+        props.allFilms()
+        props.filterFilmsByYear('2013')
+    }
+    const filmsFrom2020Year = () => {
+        props.allFilms()
+        props.filterFilmsByYear('2020')
+    }
+    const filmsFrom2022Year = () => {
+        props.allFilms()
+        props.filterFilmsByYear('2022')
+    }
 
     return (
         <div className={s.navigation}>
@@ -28,18 +56,18 @@ export const Navigation = React.memo((props: NavigationType) => {
                         <span>Genres</span>
                     </div>
                     <div onClick={actionFilms}>Action</div>
-                    <div>Detective</div>
-                    <div>Fantastic</div>
-                    <div>Thriller</div>
+                    <div onClick={detectiveFilms}>Detective</div>
+                    <div onClick={fantasticFilms}>Fantastic</div>
+                    <div onClick={thrillerFilms}>Thriller</div>
                 </div>
                 <div className={s.category}>
                     <div className={s.categoryName}>
                         <span>By year</span>
                     </div>
-                    <div>2008</div>
-                    <div>2013</div>
-                    <div>2020</div>
-                    <div>2022</div>
+                    <div onClick={filmsFrom2008Year}>2008</div>
+                    <div onClick={filmsFrom2013Year}>2013</div>
+                    <div onClick={filmsFrom2020Year}>2020</div>
+                    <div onClick={filmsFrom2022Year}>2022</div>
                 </div>
             </div>
         </div>
