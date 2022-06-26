@@ -1,7 +1,6 @@
 import {combineReducers, createStore} from 'redux'
 import {descriptionReducer} from './description-reducer'
 
-
 const rootReducer = combineReducers({
     films: descriptionReducer,
 })

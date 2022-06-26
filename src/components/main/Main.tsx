@@ -6,28 +6,39 @@ import {GenreType, Navigation} from '../navigation/Navigation'
 
 type MainType = {
     films: FilmsStateType[]
-    allFilms: () => void
-    filterFilmsByGenre: (genre: GenreType) => void
-    filterFilmsByYear: (year: string) => void
-    sortFilmsByRating: () => void
 }
 
 export const Main = React.memo((props: MainType) => {
 
-    const sortByRating = () => props.sortFilmsByRating()
+    const [filterForFilmsByGenre, setFilterForFilmsByGenre] = useState<GenreType>('all')
+    const [filterForFilmsByYear, setFilterForFilmsByYear] = useState<number | null>(null)
+
+    let filteredFilms = props.films
+    if (filterForFilmsByGenre === 'action') {
+        filteredFilms = props.films.filter(f => f.genre === 'Action')
+    }
+    if (filterForFilmsByGenre === 'detective') {
+        filteredFilms = props.films.filter(f => f.genre === 'Detective')
+    }
+    if (filterForFilmsByGenre === 'fantastic') {
+        filteredFilms = props.films.filter(f => f.genre === 'Fantastic')
+    }
+    if (filterForFilmsByGenre === 'thriller') {
+        filteredFilms = props.films.filter(f => f.genre === 'Thriller')
+    }
 
     return (
         <div className={s.main}>
             <div>
-                <Navigation films={props.films} filterFilmsByGenre={props.filterFilmsByGenre}
-                            filterFilmsByYear={props.filterFilmsByYear} allFilms={props.allFilms}/>
+                <Navigation films={props.films} filterForFilmsByGenre={filterForFilmsByGenre}
+                            setFilterForFilmsByGenre={setFilterForFilmsByGenre}
+                            filterForFilmsByYear={filterForFilmsByYear}
+                            setFilterForFilmsByYear={setFilterForFilmsByYear}/>
             </div>
             <div>
-                <div className={s.sort} onClick={sortByRating}>Rating</div>
+                <div className={s.sort}>Rating</div>
                 <div>
-                    {
-                        props.films.map(f => <FilmCard films={f}/>)
-                    }
+                    {filteredFilms.map(f => <FilmCard films={f}/>)}
                 </div>
             </div>
         </div>

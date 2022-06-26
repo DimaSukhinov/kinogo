@@ -3,14 +3,14 @@ import s from './Header.module.css';
 import {NavLink} from 'react-router-dom';
 
 type HeaderType = {
-    allFilms: () => void
+
 }
 
 export const Header = React.memo((props: HeaderType) => {
     return (
         <div className={s.header}>
             <div className={s.logo}>
-                <NavLink to={'/main'} className={s.link} onClick={props.allFilms}>kinogo</NavLink>
+                <NavLink to={'/main'} className={s.link}>kinogo</NavLink>
             </div>
             <div className={s.links}>
                 <NavLink to={'/profile'} className={s.link}>profile</NavLink>

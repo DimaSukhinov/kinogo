@@ -4,20 +4,16 @@ import noTimeToDie from '../images/noTimeToDie.jpg';
 import batman from '../images/Batman.jpg';
 import theDevilAllTheTime from '../images/TheDevilAllTheTime.jpg';
 import theDarkKnight from '../images/TheDarkKnight.jpg';
-import {GenreType} from '../components/navigation/Navigation';
 
 export type FilmsStateType = {
     id: number
     stars: number
     favourite: boolean
     filmTitle: string
-    filmImg: any //
+    filmImg: any
     about: string
     year: string
-    country: string
     genre: string
-    duration: string
-    premiere: string
 }
 
 type AddFilmToFavoriteActionType = {
@@ -26,30 +22,7 @@ type AddFilmToFavoriteActionType = {
     favourite: boolean
 }
 
-type FilterByGenreActionType = {
-    type: 'FILTER-BY-GENRE'
-    genre: string
-}
-
-type FilterByYearActionType = {
-    type: 'FILTER-BY-YEAR'
-    year: string
-}
-
-type SortByRatingActionType = {
-    type: 'SORT-BY-RATING'
-}
-
-type AllActionType = {
-    type: 'ALL'
-}
-
-type ActionsType =
-    AddFilmToFavoriteActionType
-    | FilterByGenreActionType
-    | FilterByYearActionType
-    | SortByRatingActionType
-    | AllActionType
+type ActionsType = AddFilmToFavoriteActionType
 
 const initialState = [
     {
@@ -64,10 +37,7 @@ const initialState = [
                 the Board of Directors of the company is plotting, fraught with dire consequences.
                 Using his latest invention, Stark tries to solve his company's problems dramatically...`,
         year: '2008',
-        country: 'USA',
-        duration: '02:07:00',
         genre: 'Fantastic',
-        premiere: '14 april 2008'
     },
     {
         id: 1,
@@ -81,10 +51,7 @@ const initialState = [
                 the Penguin, Carmine Falcone and the Riddler. Now under the gun is Batman himself, who will have to distinguish 
                 friend from foe and restore justice in the name of Gotham.`,
         year: '2022',
-        country: 'USA',
-        duration: '02:57:00',
         genre: 'Detective',
-        premiere: '1 march 2022'
     },
     {
         id: 2,
@@ -98,10 +65,7 @@ const initialState = [
                 of staying in this paradise for a long time. However, the idyll reigning around him begins to disappear when one 
                 day his long-time comrade Felix Leiter arrives on the island.`,
         year: '2020',
-        country: 'Great Britain, USA',
-        duration: '01:42:00',
         genre: 'Thriller',
-        premiere: '4 april 2020'
     },
     {
         id: 3,
@@ -115,10 +79,7 @@ const initialState = [
                 to not only fight an insidious enemy, but also understand himself in order to find the answer to the 
                 question that has been troubling him for a long time: what is more important - a person or a suit?`,
         year: '2013',
-        country: 'USA',
-        duration: '02:11:00',
         genre: 'Action',
-        premiere: '12 april 2013'
     },
     {
         id: 4,
@@ -133,10 +94,7 @@ const initialState = [
                 virtuoso guitarist Theodore, who is on the run from the law. The son of Willard and Charlotte grows up 
                 as a good person, but cruelty has also settled inside his heart.`,
         year: '2020',
-        country: 'USA',
-        duration: '02:18:00',
         genre: 'Thriller',
-        premiere: '16 september 2020'
     },
     {
         id: 5,
@@ -151,10 +109,7 @@ const initialState = [
                 a great interest in him, and he, in turn, is interested in the deeds of Batman. The prosecutor believes 
                 that Batman is doing a good deed, and Bruce thinks that the prosecutor will make a great replacement...`,
         year: '2008',
-        country: 'USA, Great Britain',
-        duration: '02:32:00',
         genre: 'Action',
-        premiere: '14 july 2008'
     },
 ]
 
@@ -166,22 +121,6 @@ export const descriptionReducer = (state: FilmsStateType[] = initialState, actio
             state[action.id] = {...films}
             return [...state]
         }
-        case 'FILTER-BY-GENRE': {
-            const films = state.filter(f => f.genre === action.genre)
-            state = [...films]
-            return [...state]
-        }
-        case 'FILTER-BY-YEAR': {
-            const films = state.filter(f => f.year === action.year)
-            state = [...films]
-            return [...state]
-        }
-        case 'SORT-BY-RATING':
-            const films = state.sort((a, b) => b.stars - a.stars)
-            state = [...films]
-            return [...state]
-        case 'ALL':
-            return initialState
         default:
             return state
     }
@@ -189,20 +128,4 @@ export const descriptionReducer = (state: FilmsStateType[] = initialState, actio
 
 export const addToFavouriteAC = (id: number, favourite: boolean): AddFilmToFavoriteActionType => {
     return {type: 'ADD-TO-FAVOURITE', id, favourite}
-}
-
-export const filterByGenreAC = (genre: GenreType): FilterByGenreActionType => {
-    return {type: 'FILTER-BY-GENRE', genre}
-}
-
-export const filterByYearAC = (year: string): FilterByYearActionType => {
-    return {type: 'FILTER-BY-YEAR', year}
-}
-
-export const sortByRatingAC = (): SortByRatingActionType => {
-    return {type: 'SORT-BY-RATING'}
-}
-
-export const allAC = (): AllActionType => {
-    return {type: 'ALL'}
 }
